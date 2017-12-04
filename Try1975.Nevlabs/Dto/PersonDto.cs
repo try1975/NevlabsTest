@@ -5,34 +5,13 @@ namespace Try1975.Nevlabs.Dto
 {
     public class PersonDto
     {
-        private string _phone;
-        private string _birthday;
-        private string _email;
-        private string _fullname;
+        public string Fullname { get; set; }
 
-        public string Fullname
-        {
-            get { return _fullname; }
-            set { _fullname = string.IsNullOrEmpty(value) ? value : value.ToUpper(); }
-        }
+        public string Birthday { get; set; }
 
-        public string Birthday
-        {
-            get { return _birthday; }
-            set { _birthday = string.IsNullOrEmpty(value) ? value : value.ToUpper(); }
-        }
+        public string Email { get; set; }
 
-        public string Email
-        {
-            get { return _email; }
-            set { _email = string.IsNullOrEmpty(value) ? value : value.ToUpper(); }
-        }
-
-        public string Phone
-        {
-            get { return _phone; }
-            set { _phone = string.IsNullOrEmpty(value) ? value : Regex.Replace(value, "[^0-9.]", ""); }
-        }
+        public string Phone { get; set; }
 
         public int Id { get; set; }
 
@@ -41,10 +20,10 @@ namespace Try1975.Nevlabs.Dto
             var values = csvLine.Split(csvSplitter, StringSplitOptions.None);
             var contentDto = new PersonDto
             {
-                Fullname = values[0].Replace("\"", ""),
-                Birthday = values[1].Replace("\"", ""),
-                Email = values[2].Replace("\"", ""),
-                Phone = values[3].Replace("\"", "")
+                Fullname = string.IsNullOrEmpty(values[0]) ? values[0] : values[0].Replace("\"", "").ToUpper(),
+                Birthday = string.IsNullOrEmpty(values[1]) ? values[1] : values[1].Replace("\"", "").Replace("-", ".").Replace("/", "."),
+                Email = string.IsNullOrEmpty(values[2]) ? values[2] : values[2].Replace("\"", "").ToUpper(),
+                Phone = string.IsNullOrEmpty(values[3]) ? values[3] : Regex.Replace(values[3].Replace("\"", ""), "[^0-9.]", "")
             };
 
             return contentDto;
