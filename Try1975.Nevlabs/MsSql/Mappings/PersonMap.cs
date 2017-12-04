@@ -21,7 +21,8 @@ namespace Try1975.Nevlabs.MsSql.Mappings
 
             Property(e => e.Birthday)
                 .IsOptional()
-                .HasColumnType("date")
+                .HasMaxLength(50)
+                //.HasColumnType("date")
                 ;
 
             Property(e => e.Email)

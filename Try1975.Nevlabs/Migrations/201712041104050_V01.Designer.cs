@@ -13,7 +13,7 @@ namespace Try1975.Nevlabs.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712021858417_V01"; }
+            get { return "201712041104050_V01"; }
         }
         
         string IMigrationMetadata.Source

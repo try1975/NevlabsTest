@@ -1,5 +1,7 @@
 ﻿using System.Data.Entity;
 using Try1975.Nevlabs.Entities;
+using Try1975.Nevlabs.Logic;
+using Try1975.Nevlabs.Migrations;
 using Try1975.Nevlabs.MsSql.Mappings;
 
 namespace Try1975.Nevlabs.MsSql
@@ -16,8 +18,8 @@ namespace Try1975.Nevlabs.MsSql
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            const string prefix = "";
-            modelBuilder.Configurations.Add(new PersonMap($"{prefix}{nameof(Persons)}"));
+            
+            modelBuilder.Configurations.Add(new PersonMap(Constants.CreateTableName(nameof(Persons))));
         }
     }
 
@@ -26,7 +28,7 @@ namespace Try1975.Nevlabs.MsSql
         public ConfigContext()
         {
             SetDatabaseInitializer(new CreateDatabaseIfNotExists<WorkContext>());
-            //SetDatabaseInitializer(new MigrateDatabaseToLatestVersion<WorkContext, Configuration>());
+            SetDatabaseInitializer(new MigrateDatabaseToLatestVersion<WorkContext, Configuration>());
         }
     }
 }
